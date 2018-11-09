@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//src/com/aishangxuejie/config/mailConfig.properties=UTF-8
+encoding//src/com/aishangxuejie/config/mysqldb.properties=UTF-8
+encoding//src/com/aishangxuejie/config/oracledb.properties=UTF-8
+encoding//src/com/aishangxuejie/connection/JdbcConnection.java=UTF-8
+encoding//src/com/aishangxuejie/connection/MysqlJdbcConnectionsPool.java=UTF-8
+encoding//src/com/aishangxuejie/connection/OracleJdbcConnectionsPool.java=UTF-8
+encoding//src/com/aishangxuejie/javamail/CheckErrorService2.java=UTF-8
+encoding//src/com/aishangxuejie/javamail/MailConfig.java=UTF-8
+encoding//src/com/aishangxuejie/javamail/SendMailForErrorService.java=UTF-8
+encoding//src/com/aishangxuejie/run/DoMailMain.java=UTF-8
+encoding//src/com/aishangxuejie/test/JdbcTest.java=UTF-8
+encoding//src/com/aishangxuejie/util/SysDate.java=UTF-8
+encoding/<project>=UTF-8
