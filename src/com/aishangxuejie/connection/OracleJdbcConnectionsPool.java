@@ -1,5 +1,8 @@
 package com.aishangxuejie.connection;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -8,8 +11,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
@@ -28,13 +32,36 @@ public class OracleJdbcConnectionsPool implements DataSource {
 	private static String PASS;
 	private static int JDBC_CONNECTION_InitSize;// 最小连接数量jdbcConnectionInitSize
 	private static int JDBC_MAX = 1; // 当前最大连接数量=JDBC_MAX*JDBC_InitSize
+	private static String ORACLEDB_PROPERTIES = "\\resource\\oracledb.properties";
 	static {
-		ResourceBundle resource = ResourceBundle.getBundle("com/aishangxuejie/config/oracledb");
-		JDBC_DRIVER = resource.getString("driver");
-		DB_URL = resource.getString("url");
-		USER = resource.getString("user");
-		PASS = resource.getString("pass");
-		JDBC_CONNECTION_InitSize = Integer.parseInt(resource.getString("jdbcConnectionInitSize"));
+		Properties properties = new Properties();
+    	String realpath = System.getProperty("user.dir");
+    	String path = realpath + ORACLEDB_PROPERTIES;
+    	System.out.println("配置文件路径 " + path);
+		try {
+			BufferedInputStream in = new BufferedInputStream (new FileInputStream(path));
+			properties.load(in);
+			in.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}     ///加载属性列表
+		Iterator<String> it=properties.stringPropertyNames().iterator();
+		while(it.hasNext()){
+		    String value=it.next();
+		    System.out.println(value+"="+properties.getProperty(value));
+		}
+		JDBC_CONNECTION_InitSize = Integer.valueOf(properties.getProperty("jdbcConnectionInitSize"));
+		JDBC_DRIVER = properties.getProperty("driver");
+		DB_URL = properties.getProperty("url");
+		USER = properties.getProperty("user");
+		PASS = properties.getProperty("pass");
+//		ResourceBundle resource = ResourceBundle.getBundle("com/aishangxuejie/config/oracledb");
+//		JDBC_DRIVER = resource.getString("driver");
+//		DB_URL = resource.getString("url");
+//		USER = resource.getString("user");
+//		PASS = resource.getString("pass");
+//		JDBC_CONNECTION_InitSize = Integer.parseInt(resource.getString("jdbcConnectionInitSize"));
 		try {
 			Class.forName(JDBC_DRIVER);
 

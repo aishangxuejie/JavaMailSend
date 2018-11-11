@@ -38,7 +38,10 @@ public class DoMailMain {
 				public void run() {
 					try {
 						CheckErrorService2.checkError();
-					} catch (InterruptedException | ParseException e) {
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -55,7 +58,10 @@ public class DoMailMain {
 				public void run() {
 					try {
 						CheckErrorService2.checkError();
-					} catch (InterruptedException | ParseException e) {
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

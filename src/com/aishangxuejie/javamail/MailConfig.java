@@ -1,15 +1,16 @@
 package com.aishangxuejie.javamail;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Properties;
 
 
 /**
  * @author CuiGM
  * @date 2018年6月14日 下午4:42:15
- * @param PROPERTIES
+ * @param properties
  * @param MAIL_SMTOHOST 邮件服务器
  * @param SMTP_TYPE 协议类型
  * @Param MAIL_PORT 邮件服务器端口
@@ -25,8 +26,7 @@ import java.util.Properties;
  * 
  */
 public class MailConfig {
-	private static final String PROPERTIES_DEFAULT = "\\resource\\mailConfig.properties";
-    public static Properties PROPERTIES;
+	public static final String MAILCONFIG_PROPERTIES = "\\resource\\mailConfig.properties";
     public static String MAIL_SMTOHOST;
     public static String SMTP_TYPE;
     public static String MAIL_PORT;
@@ -54,43 +54,31 @@ public class MailConfig {
      */
     private static void init() throws IOException {
     	System.out.println("start：---------------------邮件服务器配置文件--------------------");
-        PROPERTIES = new Properties();
         try{
+        	Properties properties = new Properties();
         	String realpath = System.getProperty("user.dir");
-        	String path = realpath + PROPERTIES_DEFAULT;
+        	String path = realpath + MAILCONFIG_PROPERTIES;
         	System.out.println("配置文件路径 " + path);
-        	FileReader filereader = null;
-        	try {
-        		filereader = new FileReader(path);
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
-        	BufferedReader br = new BufferedReader(filereader);
-    		String line;
-    		Object[] obj =null;
-    		while ((line = br.readLine()) != null) {
-    			if(!line.startsWith("#")&&!line.startsWith(" ")){
-    				System.out.println(line);
-    				obj = line.toString().trim().split("=");
-    				if(obj.length == 2) {
-    					PROPERTIES.put(obj[0]==null?"":obj[0].toString(),obj[1]==null?"":obj[1].toString());
-    				}
-    			}
-    		}
-    		
-    		filereader.close();
-            MAIL_SMTOHOST = PROPERTIES.getProperty("mail.smtp.host");	//	发件人的邮箱的 SMTP 服务器地址
-        	SMTP_TYPE = PROPERTIES.getProperty("mail.transport.protocol");	//	使用的协议（JavaMail规范要求）
-        	MAIL_PORT = PROPERTIES.getProperty("mail.smtp.port");	//	端口
-        	ENABLE = PROPERTIES.getProperty("mail.smtp.starttls.enable");	//tsl加密
-        	AUTH = PROPERTIES.getProperty("mail.smtp.auth");	//	请求认证
-        	SSL = PROPERTIES.getProperty("mail.smtp.socketFactory.class");	//如果需要ssl
-        	FALLBACK = PROPERTIES.getProperty("mail.smtp.socketFactory.fallback");
-        	MAIL_ACCOUNT = PROPERTIES.getProperty("mail.sender.username");	//	邮箱服务器发邮件账户
-        	MAIL_PASSOWORD = PROPERTIES.getProperty("mail.sender.password");	//	密码或授权码
-        	RECEIVE_MAILACCOUNT = PROPERTIES.getProperty("mail.receiver.account");	//	主收件人
-        	RECEIVE_MAILCOPYTO1 = PROPERTIES.getProperty("mail.receiver.copyTo");	//	抄送人
-        	RECEIVE_MAILCOPYTO2 = PROPERTIES.getProperty("mail.receiver.copyTo");	//	抄送人
+        	BufferedInputStream in = new BufferedInputStream (new FileInputStream(path));
+    		properties.load(in);     ///加载属性列表
+    		in.close();
+			Iterator<String> it=properties.stringPropertyNames().iterator();
+			while(it.hasNext()){
+			    String value=it.next();
+			    System.out.println(value+"="+properties.getProperty(value));
+			}
+            MAIL_SMTOHOST = properties.getProperty("mail.smtp.host");	//	发件人的邮箱的 SMTP 服务器地址
+        	SMTP_TYPE = properties.getProperty("mail.transport.protocol");	//	使用的协议（JavaMail规范要求）
+        	MAIL_PORT = properties.getProperty("mail.smtp.port");	//	端口
+        	ENABLE = properties.getProperty("mail.smtp.starttls.enable");	//tsl加密
+        	AUTH = properties.getProperty("mail.smtp.auth");	//	请求认证
+        	SSL = properties.getProperty("mail.smtp.socketFactory.class");	//如果需要ssl
+        	FALLBACK = properties.getProperty("mail.smtp.socketFactory.fallback");
+        	MAIL_ACCOUNT = properties.getProperty("mail.sender.username");	//	邮箱服务器发邮件账户
+        	MAIL_PASSOWORD = properties.getProperty("mail.sender.password");	//	密码或授权码
+        	RECEIVE_MAILACCOUNT = properties.getProperty("mail.receiver.account");	//	主收件人
+        	RECEIVE_MAILCOPYTO1 = properties.getProperty("mail.receiver.copyTo1");	//	抄送人
+        	RECEIVE_MAILCOPYTO2 = properties.getProperty("mail.receiver.copyTo2");	//	抄送人
         } catch(IOException e){
             e.printStackTrace();
         }

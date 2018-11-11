@@ -26,6 +26,7 @@ public class JdbcConnection {
 	private static OracleJdbcConnectionsPool ORACLEPOOL = new OracleJdbcConnectionsPool();
 
 	/**
+	 * @author Aishangxuejie
 	 * @Method: getMySQLConnection
 	 * @Description: 从数据库连接池中获取数据库连接对象
 	 * @return Connection数据库连接对象
@@ -36,6 +37,7 @@ public class JdbcConnection {
 	}
 
 	/**
+	 * @author Aishangxuejie
 	 * @Method: getOracleConnection
 	 * @Description: 从数据库连接池中获取数据库连接对象
 	 * @return Connection数据库连接对象
@@ -46,9 +48,9 @@ public class JdbcConnection {
 	}
 
 	/**
+	 * @author Aishangxuejie
 	 * @Method: release
-	 * @Description: 释放资源，
-	 * 释放的资源包括Connection数据库连接对象，负责执行SQL命令的Statement对象，存储查询结果的ResultSet对象
+	 * @Description: 释放资源， 释放的资源包括Connection数据库连接对象，负责执行SQL命令的Statement对象，存储查询结果的ResultSet对象
 	 * @param conn
 	 * @param st
 	 * @param rs

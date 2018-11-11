@@ -162,7 +162,7 @@ public class SendMailForErrorService {
 			e.printStackTrace();
 			return false;
 		}
-		System.out.println("发送成功！关闭链接！");
+		System.out.println("邮件发送成功！关闭链接！");
 		return true;
     }
 }
