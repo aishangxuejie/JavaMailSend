@@ -18,3 +18,5 @@ mail.sender.password=
 
 未开启ssl 端口25
 开启ssl 465（587）
+点击链接加入群聊【Java开源技术分享】：https://jq.qq.com/?_wv=1027&k=5qOUZIX<br>
+551404618Java开源技术分享

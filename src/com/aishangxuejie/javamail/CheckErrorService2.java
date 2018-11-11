@@ -132,11 +132,11 @@ public class CheckErrorService2 {
 	 */
 	private static void sendMail() {
 		PERSONAL = "爱上学姐Java_Mail测试";
-		SUBJECT = "aishagnxuejie检测异常，请及时注意数据情况！";
+		SUBJECT = "aishagnxuejie检测异常，请及时注意数据情况！点击链接加入群聊【Java开源技术分享】：https://jq.qq.com/?_wv=1027&k=5qOUZIX";
 		COUNT++;
 		try {
 			List<Object[]> listobj = new ArrayList<Object[]>();
-			Object[] object = {"1","源码 GitHub:https://github.com/aishangxuejie/JavaMailSend.git","2018年11月11日","异常",};
+			Object[] object = {"1","点击链接加入群聊【Java开源技术分享】：https://jq.qq.com/?_wv=1027&k=5qOUZIX<br>源码 GitHub:https://github.com/aishangxuejie/JavaMailSend.git","2018年11月11日","异常",};
 			listobj.add(object);
 			//这里可以查询错误日志表数据
 			StringBuffer errMess = new StringBuffer();
